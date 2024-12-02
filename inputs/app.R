@@ -9,6 +9,8 @@
 
 library(shiny)
 
+library(ExpDes.pt) #Carregando ExpDes.pt para teste
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
