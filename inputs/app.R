@@ -9,7 +9,11 @@
 
 library(shiny)
 
-library(ExpDes.pt) #Carregando ExpDes.pt para teste
+ls("package:shiny") |>
+  grep(pattern = "Input$", ignore.case = F, x=_, value=T)
+
+apropos("Button", ignore.case = F)
+apropos("Input$", ignore.case = F)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -24,7 +28,10 @@ ui <- fluidPage(
                         "Number of bins:",
                         min = 1,
                         max = 50,
-                        value = 30)
+                        value = 30),
+        selectInput(inputId = "COLOR", 
+                    label = "Cor das barras", 
+                    choices = c("red", "blue", "#AA7712"))
         ),
 
         # Show a plot of the generated distribution
@@ -43,7 +50,7 @@ server <- function(input, output) {
         bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
         # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
+        hist(x, breaks = bins, col = input$COLOR, border = 'white',
              xlab = 'Waiting time to next eruption (in mins)',
              main = 'Histogram of waiting times')
     })
