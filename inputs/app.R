@@ -31,9 +31,9 @@ ui <- fluidPage(
                         value = 30),
         selectInput(inputId = "COLOR", 
                     label = "Cor das barras", 
-                    choices = c("red", "blue", "#AA7712"))
+                    choices = c("red", "blue", "#AA7712")),
         ),
-
+  
         # Show a plot of the generated distribution
         mainPanel(
            plotOutput("distPlot")
