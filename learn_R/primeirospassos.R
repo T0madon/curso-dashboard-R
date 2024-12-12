@@ -373,3 +373,44 @@ ls()
 rm(a, b)
 
 #-----------------------------------------------------------------------
+
+install.packages("mcglm")
+help(package = "mcglm")
+
+vet <- c(3.62, 2.78, 2.42, 3.13, 2.64, 1.92, 1.97, 2.39, 3.61, 1.10)
+mean(vet)
+sd(vet)
+median(vet)
+
+1 + NA
+5 + NULL
+
+plot(1:10, 1:10)
+
+
+matA <- matrix(c(1.56, 0.03, 1.57, 2.94), nrow = 2, byrow = TRUE)
+matA
+matB <- matrix(c(1.27, 2.48, 2.01, 0.01), nrow = 2, byrow = TRUE)
+matB
+
+matA * matB
+
+install.packages("datasets")
+library("datasets")
+a <- datasets::airquality
+a
+
+mean(a[["Ozone"]], na.rm = TRUE)
+
+b <- datasets::attenu
+b
+b[,c("event", "accel")]
+
+
+
+
+
+
+
+
+
