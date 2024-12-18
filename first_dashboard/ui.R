@@ -4,7 +4,12 @@ shinyUI(
     fluidPage(
         sidebarLayout(
             sidebarPanel(
-                h1("Olá")
+                selectInput(
+                    inputId = "UF_SEL",
+                    label = "UF",
+                    choices = UF_CHOICES,
+                    selected = "SP"
+                )
             ),
             mainPanel(
                 fluidRow(
