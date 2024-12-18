@@ -34,12 +34,11 @@ gg_scatter <- ggplot(data = tb_filtered,
 
 tb_10 <- tb_filtered |>
   slice_max(order_by = alfab , n = 10)
+ 
 
 tb_cards <- 
   tb_filtered |>
     summarise(across(c("renda", "alfab"), ~median(., na.rm = TRUE)))
-
-#img_path <- paste0("./imagens", UF_SEL, ".png")
 
 img_path <- paste0("./imagens/", UF_SEL, ".png")
 
