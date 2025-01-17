@@ -1,4 +1,5 @@
 library(shiny)
+library(shinydashboard)
 
 shinyUI(
     fluidPage(
@@ -8,10 +9,20 @@ shinyUI(
                     inputId = "UF_SEL",
                     label = "UF",
                     choices = UF_CHOICES,
-                    selected = "SP"
+                    selected = "PR"
                 )
             ),
             mainPanel(
+                fluidRow(
+                    column(
+                        width = 6,
+                        shinydashboard::valueBoxOutput("RENDA_AGG"),
+                    ),
+                    column(
+                        width = 6,
+                        shinydashboard::infoBoxOutput("ALFAB_AGG"),
+                    )
+                ),
                 fluidRow(
                     column(
                         width = 6,
@@ -21,6 +32,16 @@ shinyUI(
                         width = 6,
                         tableOutput("TOP_10")
                     )
+                ),
+                fluidRow(
+                    column(
+                        width = 6,
+                        htmlOutput(outputId = "MAPA")
+                    ),
+                    column(
+                        width = 6,
+                        "Teste"
+                    ),
                 ),
                 fluidRow(
                     column(

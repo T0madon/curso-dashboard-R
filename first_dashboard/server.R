@@ -1,5 +1,7 @@
 setwd("~/UEPG - 3° ano/IC estatística/curso_R/first_dashboard")
 library(shiny)
+install.packages('googleVis')
+library(googleVis)
 
 shinyServer(function(input, output) {
     
@@ -43,4 +45,41 @@ shinyServer(function(input, output) {
         tb_cards
     })
     
+    output$RENDA_AGG <- shinydashboard::renderValueBox({
+        renda_agg <- median(FILTERED_DATA()$renda, na.rm = TRUE)
+        shinydashboard::valueBox(
+            renda_agg, 
+            "Renda mediana do Estado", 
+            icon = icon("credit-card"), 
+            color = "orange")
+    })
+    
+    output$ALFAB_AGG <- shinydashboard::renderInfoBox({
+        alfab_agg <- median(FILTERED_DATA()$alfab, na.rm = TRUE)
+        shinydashboard::infoBox(
+            "Alfabetismo do Estado", 
+            alfab_agg, 
+            icon = icon("credit-card"), 
+            color = "orange")
+    })
+    
+    output$MAPA <- googleVis::renderGvis({
+        
+        tb_sigla <- tibble::tibble(
+            uf = c("São Paulo", "Minas Gerais", "Rio de Janeiro", "Bahia", "Paraná", "Rio Grande do Sul", "Pernambuco", "Ceará", "Pará", "Santa Catarina", "Maranhão", "Goiás", "Amazonas"), 
+            sigla = c("SP", "MG", "RJ", "BA", "PR", "RS", "PE", "CE", "PA", "SC", "MA", "GO", "AM"),)
+        
+        i <- input$UF_SEL == tb_sigla$sigla
+        
+        googleVis::gvisGeoChart(data = tb_sigla[i, ], 
+                                locationvar = "uf", 
+                                options = list(region = "BR", 
+                                               displayMode = "regions", 
+                                               resolution = "provinces",
+                                               defautColor = "purple",
+                                               width = 800,
+                                               height = 800))
+    })
+    
 })
+
